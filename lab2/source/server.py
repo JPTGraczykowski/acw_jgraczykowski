@@ -25,9 +25,11 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             elif query_components['cmd'] == ['time']:
                 self.wfile.write(str.encode(datetime.now().strftime('%H:%M:%S')))
             elif query_components['cmd'] == ['rev']:
-                string_to_reverse = query_components.get('str', [''])[0]
-                reversed_string = string_to_reverse[::-1]
-                self.wfile.write(reversed_string)
+                string_to_reverse_param = query_components.get('str', None)
+                if string_to_reverse_param:
+                    string_to_reverse = string_to_reverse_param[0]
+                    reversed_string = string_to_reverse[::-1]
+                    self.wfile.write(str.encode(reversed_string))
         else:
             super().do_GET()
     
