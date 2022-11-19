@@ -3,7 +3,7 @@ import http.server
 import socketserver
 import os
 from datetime import datetime
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 #print('source code for "http.server":', http.server.__file__)
 
