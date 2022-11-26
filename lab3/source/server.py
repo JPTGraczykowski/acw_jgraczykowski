@@ -21,7 +21,11 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()
 
-            if word = query_components.get('str', None)[0]:
+            word_param = query_components.get('str', None)
+            
+            if word_param:
+                word = word_param[0]
+
                 result = {}
                 lower = 0
                 upper = 0
@@ -33,6 +37,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                             lower += 1
                         else:
                             upper += 1
+                    
         else:
             super().do_GET()
     
