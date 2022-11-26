@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
 import re
+import json
 
 #print('source code for "http.server":', http.server.__file__)
 
@@ -45,7 +46,10 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                         digits += 1
                     elif re.search(specials_regex, char):
                         specials += 1
-                    
+
+                result = { "lowercase" : lower, "uppercase" : upper, "digits" : digits, "special" : specials }
+
+                self.wfile.write(str.encode(json.dumps(result))
                     
         else:
             super().do_GET()
