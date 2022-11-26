@@ -21,9 +21,18 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()
 
-            if word = query_components.get('str', None):
-                chars = word.split('')
+            if word = query_components.get('str', None)[0]:
                 result = {}
+                lower = 0
+                upper = 0
+                digits = 0
+
+                for char in word:
+                    if char.isalpha():
+                        if char.islower():
+                            lower += 1
+                        else:
+                            upper += 1
         else:
             super().do_GET()
     
