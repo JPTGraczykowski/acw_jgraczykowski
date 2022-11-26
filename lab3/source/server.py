@@ -4,6 +4,7 @@ import socketserver
 import os
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
+import re
 
 #print('source code for "http.server":', http.server.__file__)
 
@@ -30,6 +31,9 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                 lower = 0
                 upper = 0
                 digits = 0
+                specials = 0
+
+                specials_regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
 
                 for char in word:
                     if char.isalpha():
@@ -37,6 +41,11 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                             lower += 1
                         else:
                             upper += 1
+                    elif char.isdigit():
+                        digits += 1
+                    elif re.search(specials_regex, char):
+                        specials += 1
+                    
                     
         else:
             super().do_GET()
