@@ -20,6 +20,10 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()
+
+            if word = query_components.get('str', None):
+                chars = word.split('')
+                result = {}
         else:
             super().do_GET()
     
