@@ -49,7 +49,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 
                 result = { "lowercase" : lower, "uppercase" : upper, "digits" : digits, "special" : specials }
 
-                self.wfile.write(str.encode(json.dumps(result))
+                self.wfile.write(str.encode(json.dumps(result)))
                     
         else:
             super().do_GET()
